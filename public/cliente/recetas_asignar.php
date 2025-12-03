@@ -3,7 +3,7 @@ session_start();
 if (!isset($_SESSION['tip_usu']) || $_SESSION['tip_usu'] != 2) { header('Location: ../login.php'); exit; }
 require_once __DIR__ . '/../../lib/gestor_recetas.php';
 
-$clientes = obtener_clientes();
+$clientes = obtener_pacientes_por_medico($_SESSION['id_usr']);
 $recetas = obtener_recetas();
 $planes_asignados = obtener_planes_asignados($_SESSION['id_usr']); // Nueva función
 $mensaje = isset($_GET['msg']) ? $_GET['msg'] : '';
@@ -35,7 +35,7 @@ $mensaje = isset($_GET['msg']) ? $_GET['msg'] : '';
                             <select name="id_cliente" class="form-select" required>
                                 <option value="">-- Seleccione --</option>
                                 <?php foreach($clientes as $c): ?>
-                                    <option value="<?= $c['id_usr'] ?>"><?= $c['nom_usr'] ?></option>
+                                    <option value="<?= $c['id_cli'] ?>"><?= $c['nom_usr'] ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>

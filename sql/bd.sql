@@ -46,6 +46,9 @@ CREATE table clientes(
     
 
 );
+SELECT * FROM `clientes`;
+
+SELECT * FROM `medico`;
 
 CREATE table comentarios(
     id_com INT(5) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -83,6 +86,9 @@ CREATE TABLE plan_semanal (
     tipo_comida ENUM('Desayuno', 'Almuerzo', 'Comida', 'Cena') NOT NULL,
     UNIQUE KEY unique_plan (id_cliente, dia_semana, tipo_comida) -- Evita duplicar comidas el mismo día/hora
 );
+SELECT * FROM `plan_semanal`;
+
+DELETE FROM `plan_semanal` WHERE id_plan=2;
 
 -- Tabla p ara Citas
 CREATE TABLE citas (

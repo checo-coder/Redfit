@@ -15,8 +15,13 @@ $mensaje=isset($_GET['error']) ? $_GET['error'] : '';
     <meta charset="UTF-8">
     <title>Login - Gestor Web</title>
     <link href="assets/css/login.css" rel="stylesheet">
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
 </head>
-
+<style>
+    .body{
+        background-color: #DCE8F0;
+    }
+</style>
 <body class="body">
     <section>
         <img class="logo" src="assets/img/Redfit.png" alt="">
@@ -38,7 +43,6 @@ $mensaje=isset($_GET['error']) ? $_GET['error'] : '';
                 <input class="input" type="password" placeholder="Contraseña" id="pass" name="pass" required>
                 <button class="btn-enviar" type="submit">Ingresar</button>
             </form>
-            <a href="registro.php" class="vinculo">¿Todavia no tienes una cuenta?</a>
 
         </div>
     </section>

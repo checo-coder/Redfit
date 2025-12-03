@@ -67,9 +67,9 @@ function asignar_plan($id_medico, $id_cliente, $id_receta, $dia, $comida){
 function obtener_planes_asignados($id_medico){
     global $conn;
     // Hacemos JOIN para traer el nombre del cliente y el nombre de la receta
-    $sql = "SELECT p.*, m.nom_usr as cliente, r.nombre as receta_nombre, r.calorias 
+    $sql = "SELECT p.*, c.nom_usr as cliente, r.nombre as receta_nombre, r.calorias 
             FROM plan_semanal p
-            JOIN medico m ON p.id_cliente = m.id_usr
+            JOIN clientes c ON p.id_cliente = c.id_cli
             JOIN recetas r ON p.id_receta = r.id_receta
             WHERE p.id_medico = ?
             ORDER BY FIELD(p.dia_semana, 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'),
@@ -84,9 +84,29 @@ function obtener_planes_asignados($id_medico){
 
 function obtener_clientes(){
     global $conn;
-    $sql = "SELECT id_usr, nom_usr FROM medico WHERE tip_usu != 1"; 
+    $sql = "SELECT id_cli, nom_usr FROM clientes"; 
     $result = mysqli_query($conn, $sql);
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
+}
+function obtener_pacientes_por_medico($id_medico){
+    global $conn;
+    
+    // Seleccionamos clientes que pertenezcan al médico (id_usr) y que estén activos (estatus=1)
+    $sql = "SELECT * FROM clientes WHERE id_usr = ? AND estatus = 1 ORDER BY nom_usr ASC";
+    
+    $stmt = mysqli_prepare($conn, $sql);
+    
+    // 'i' indica que el id es un entero
+    mysqli_stmt_bind_param($stmt, 'i', $id_medico);
+    
+    mysqli_stmt_execute($stmt);
+    $res = mysqli_stmt_get_result($stmt);
+    
+    $pacientes = [];
+    while($row = mysqli_fetch_assoc($res)){
+        $pacientes[] = $row;
+    }
+    return $pacientes;
 }
 
 // PROCESAMIENTO DE FORMULARIOS POST

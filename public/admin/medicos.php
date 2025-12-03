@@ -43,6 +43,9 @@ exit();
                     require_once __DIR__ .'/../../lib/gestor_medico.php';
                     $medicos=mostrar_productos();
                     foreach($medicos as $fila_tabla){
+                        if($fila_tabla['tip_usu']==2){
+                            
+                        
                     
                     ?>
                     <tr>
@@ -63,6 +66,7 @@ exit();
                         </tr>
                     
                     <?php 
+                        }
                     }
                     
                     ?>
