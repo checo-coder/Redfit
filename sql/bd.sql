@@ -50,6 +50,49 @@ CREATE TABLE IF NOT EXISTS `catalogo`(
 --     `importe` INT NOT NULL
 -- );
 
+
+-- DESDE AQUÍ CAMBIA LA BASE DE DATOS 
+-- DESDE AQUÍ CAMBIA LA BASE DE DATOS -- DESDE AQUÍ CAMBIA LA BASE DE DATOS 
+-- DESDE AQUÍ CAMBIA LA BASE DE DATOS 
+
+-- Tabla para guardar las recetas creadas por los médicos
+CREATE TABLE recetas (
+    id_receta INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    ingredientes TEXT NOT NULL,
+    descripcion TEXT,
+    preparacion TEXT NOT NULL,
+    calorias INT NOT NULL,
+    id_medico INT NOT NULL, -- Quién creó la receta
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Tabla para asignar recetas a clientes (Plan Semanal)
+CREATE TABLE plan_semanal (
+    id_plan INT AUTO_INCREMENT PRIMARY KEY,
+    id_medico INT NOT NULL,
+    id_cliente INT NOT NULL,
+    id_receta INT NOT NULL,
+    dia_semana ENUM('Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo') NOT NULL,
+    tipo_comida ENUM('Desayuno', 'Almuerzo', 'Comida', 'Cena') NOT NULL,
+    UNIQUE KEY unique_plan (id_cliente, dia_semana, tipo_comida) -- Evita duplicar comidas el mismo día/hora
+);
+
+-- Tabla p ara Citas
+CREATE TABLE citas (
+    id_cita INT AUTO_INCREMENT PRIMARY KEY,
+    id_medico INT NOT NULL,
+    id_cliente INT NOT NULL,
+    fecha_cita DATE NOT NULL,
+    hora_cita TIME NOT NULL,
+    motivo VARCHAR(255),
+    estatus ENUM('Pendiente', 'Confirmada', 'Cancelada') DEFAULT 'Pendiente'
+);
+
+-- DESDE AQUÍ TERMINAN LOS CAMBIOS 
+-- DESDE AQUÍ TERMINAN LOS CAMBIOS -- DESDE AQUÍ TERMINAN LOS CAMBIOS
+-- DESDE AQUÍ TERMINAN LOS CAMBIOS 
+
 -- Datos de ejemplo
 INSERT INTO medico
 VALUES
