@@ -19,7 +19,7 @@
         </li>
 
         <li class="nav-item m-3">
-            <a class="nav-link fw-semibold d-flex align-items-center" href="#">
+            <a class="nav-link fw-semibold d-flex align-items-center" href="pacientes.php">
                 <i class="bi bi-people-fill me-2 fs-5"></i> Gestionar clientes
             </a>
         </li>
