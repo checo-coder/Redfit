@@ -1,9 +1,9 @@
 <?php
 session_start();
-if (!isset($_SESSION['tip_usu']) || $_SESSION['tip_usu'] != 2) { header('Location: ../login.php'); exit; }
+if (!isset($_SESSION['tip_usu']) || $_SESSION['tip_usu'] != 2||$_SESSION['estatus']==0||!isset($_SESSION['estatus'])) { header('Location: ../login.php?error='.urlencode('Acceso no autorizado')); exit; }
 require_once __DIR__ . '/../../lib/gestor_citas.php';
 require_once __DIR__ . '/../../lib/gestor_recetas.php'; // Para reutilizar obtener_clientes
-$clientes = obtener_clientes();
+$clientes = obtener_pacientes_por_medico($_SESSION['id_usr']);
 $citas = obtener_citas_medico($_SESSION['id_usr']);
 ?>
 <!DOCTYPE html>
@@ -28,7 +28,7 @@ $citas = obtener_citas_medico($_SESSION['id_usr']);
                     <label>Cliente</label>
                     <select name="id_cliente" class="form-select" required>
                         <?php foreach($clientes as $c): ?>
-                            <option value="<?= $c['id_usr'] ?>"><?= $c['nom_usr'] ?></option>
+                            <option value="<?= $c['id_cli'] ?>"><?= $c['nom_usr'] ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>

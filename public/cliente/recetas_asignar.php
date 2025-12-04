@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['tip_usu']) || $_SESSION['tip_usu'] != 2) { header('Location: ../login.php'); exit; }
+if (!isset($_SESSION['tip_usu']) || $_SESSION['tip_usu'] != 2||$_SESSION['estatus']==0||!isset($_SESSION['estatus'])) { header('Location: ../login.php?error=' . urlencode('Acceso no autorizado')); exit; }
 require_once __DIR__ . '/../../lib/gestor_recetas.php';
 
 $clientes = obtener_pacientes_por_medico($_SESSION['id_usr']);

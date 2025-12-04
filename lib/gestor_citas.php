@@ -13,9 +13,9 @@ function agendar_cita($id_medico, $id_cliente, $fecha, $hora, $motivo){
  
 function obtener_citas_medico($id_medico){
     global $conn;
-    $sql = "SELECT c.*, m.nom_usr as cliente 
+    $sql = "SELECT c.*, cli.nom_usr as cliente 
             FROM citas c 
-            JOIN medico m ON c.id_cliente = m.id_usr 
+            JOIN clientes cli ON c.id_cliente = cli.id_usr 
             WHERE c.id_medico = ? ORDER BY c.fecha_cita, c.hora_cita";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, 'i', $id_medico);

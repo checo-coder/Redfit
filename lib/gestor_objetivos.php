@@ -49,6 +49,7 @@ function eliminar_objetivo($id_obj){
         return ['estatus'=> 'error', 'mensaje'=> 'Error en la preparación de la BD'];
     }
     mysqli_stmt_bind_param($delete_preparado, 'i', $id_obj);
+    try {
     $query_ok=mysqli_stmt_execute($delete_preparado); 
 
     $rows_ok =mysqli_affected_rows($conn);
@@ -58,6 +59,9 @@ function eliminar_objetivo($id_obj){
         return ['estatus'=>'msg', 'mensaje'=>'Objetivo eliminado correctamente'];
     }else{
         return ['estatus'=>'error', 'mensaje'=>'Error al borrar. No hubo cambios'];
+    }
+} catch (Exception $e) {
+        return ['estatus'=>'error', 'mensaje'=>'Error al eliminar. El objetivo esta en uso cominiquese con sus medicos para que lo reasignen.'];
     }
 }
 

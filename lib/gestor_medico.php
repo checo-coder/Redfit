@@ -71,6 +71,7 @@ function eliminar_medico($id_usr){
 
     }
     mysqli_stmt_bind_param($delete_preparado, 'i', $id_usr);
+    try {
     $query_ok=mysqli_stmt_execute($delete_preparado); //True o False 
 
     $rows_ok =mysqli_affected_rows($conn); //0>1
@@ -87,6 +88,23 @@ function eliminar_medico($id_usr){
         'mensaje'=>'Error al borrar el medico. no hubo cambios'
         ];
 
+    }
+    } catch (mysqli_sql_exception $e) {
+        // Si ocurre un error, el código salta directamente aquí
+        
+        // El código 1451 en MySQL significa "Fallo de llave foránea"
+        if ($e->getCode() == 1451) {
+            return [
+                'estatus'=>'error',
+                'mensaje'=>'NO SE PUEDE BORRAR: Este médico tiene pacientes o citas asignadas. Reasígnalos primero.'
+            ];
+        } else {
+            // Cualquier otro error raro
+            return [
+                'estatus'=>'error',
+                'mensaje'=>'Error desconocido de base de datos: ' . $e->getMessage()
+            ];
+        }
     }
 
 }

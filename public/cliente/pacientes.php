@@ -2,7 +2,7 @@
 session_start();
 
 // 1. SEGURIDAD: Verificar que sea Médico (Tipo 2)
-if (!isset($_SESSION['tip_usu']) || $_SESSION['tip_usu'] != 2) {
+if (!isset($_SESSION['tip_usu']) || $_SESSION['tip_usu'] != 2||$_SESSION['estatus']==0||!isset($_SESSION['estatus'])) {
     header('Location: ../login.php?error=' . urlencode('Acceso no autorizado'));
     exit();
 }

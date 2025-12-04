@@ -1,6 +1,6 @@
 <?php
 session_start();
-if ($_SESSION['tip_usu']==1||!isset($_SESSION['tip_usu'])){
+if ($_SESSION['tip_usu']==1||!isset($_SESSION['tip_usu'])||$_SESSION['estatus']==0||!isset($_SESSION['estatus'])){
 header('Location: ../login.php?error='.urlencode('Acceso no autorizado'));
 exit();
 }

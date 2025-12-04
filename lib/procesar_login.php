@@ -10,7 +10,7 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
         echo "$mail, $password<br>";
         
         //consulta preparada
-        $sql="SELECT id_usr, nom_usr, mail, pass, dir_usr ,tip_usu FROM medico WHERE mail = ?";
+        $sql="SELECT id_usr, nom_usr, mail, pass, estatus ,tip_usu FROM medico WHERE mail = ?";
         $consulta_preparada= mysqli_prepare($conn, $sql);
         mysqli_stmt_bind_param($consulta_preparada, "s", $mail);
         mysqli_stmt_execute($consulta_preparada);
@@ -29,7 +29,7 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
                 $_SESSION['nom_usr']=$usuario['nom_usr'];
                 $_SESSION['mail']=$usuario['mail'];
                 $_SESSION['tip_usu']=$usuario['tip_usu'];
-                $_SESSION['dir_usr']=$usuario['dir_usr'];
+                $_SESSION['estatus']=$usuario['estatus'];
                 echo $usuario['tip_usu'];
 
                 if($usuario['tip_usu'] == 1){
