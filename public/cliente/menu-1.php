@@ -29,6 +29,11 @@
                 <i class="bi bi-clipboard2-pulse-fill me-2 fs-5"></i> Gestionar recetas
             </a>
         </li>
+        <li class="nav-item m-3">
+            <a class="nav-link fw-semibold d-flex align-items-center" href="chat_medico.php">
+                <i class="bi bi-chat-dots-fill me-2 fs-5"></i> Mensajes Pacientes
+            </a>
+        </li>
 
     </ul>
 </div>

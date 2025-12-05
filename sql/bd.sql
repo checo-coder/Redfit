@@ -48,6 +48,9 @@ CREATE table clientes(
 );
 SELECT * FROM `clientes`;
 
+INSERT INTO `clientes` (`nom_usr`, `mail`, `dir_usr`, `edad`, `sexo`, `peso`, `altura`, `img`, `id_obj`, `id_usr`) VALUES
+('sergio', 'sergio.perez@email.com', 'Col. Centro, Casa 4', 28, 'Masculino', 85.50, 1.75, 'https://randomuser.me/api/portraits/men/11.jpg', 1, 13);
+
 SELECT * FROM `medico`;
 
 CREATE table comentarios(

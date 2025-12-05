@@ -15,7 +15,7 @@ function obtener_citas_medico($id_medico){
     global $conn;
     $sql = "SELECT c.*, cli.nom_usr as cliente 
             FROM citas c 
-            JOIN clientes cli ON c.id_cliente = cli.id_usr 
+            JOIN clientes cli ON c.id_cliente = cli.id_cli 
             WHERE c.id_medico = ? ORDER BY c.fecha_cita, c.hora_cita";
     $stmt = mysqli_prepare($conn, $sql);
     mysqli_stmt_bind_param($stmt, 'i', $id_medico);
